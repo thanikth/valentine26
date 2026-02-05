@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/dashboard",
+    "name": "Dashboard",
+    "id": 0,
+    "menu": "dashboard",
+    "icon": "/mail_love.png"
+  },
+  {
+    "path": "/aniversary",
+    "name": "Aniversary",
+    "id": 1,
+    "menu": "aniversary",
+    "icon": "/aniversary.png"
+  },
+  {
+    "path": "/message",
+    "name": "Message",
+    "id": 2,
+    "menu": "message",
+    "icon": "/mail_love.png"
+  },
+  {
+    "path": "/album",
+    "name": "Album",
+    "id": 3,
+    "menu": "album",
+    "icon": "/album.png"
+  }
+]

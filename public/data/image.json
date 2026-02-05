@@ -1,0 +1,17 @@
+[
+  {
+    "name": "image1",
+    "id": 0,
+    "image": "/album/image1.jpg"
+  },
+  {
+    "name": "image1",
+    "id": 1,
+    "image": "/album/image1.jpg"
+  },
+  {
+    "name": "image1",
+    "id": 2,
+    "image": "/album/image1.jpg"
+  }
+]
