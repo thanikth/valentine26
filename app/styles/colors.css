@@ -1,12 +1,12 @@
 :root {
   /* Primary palette */
-  --color-primary: #FF6B6B;
+  --color-primary: #ff6b6b;
   --color-primary-700: #e65a5a;
   --color-primary-300: #ffd6d6;
 
   /* Secondary / accent */
   --color-secondary: #f5cded;
-  --color-accent: #FFD93D;
+  --color-accent: #ffd93d;
 
   /* Neutrals */
   --color-bg: #fff7f9;
@@ -16,17 +16,25 @@
   --color-muted-text: #6b6b6b;
 
   /* Success / info / warn / danger */
-  --color-success: #34D399;
-  --color-info: #60A5FA;
-  --color-warn: #FBBF24;
-  --color-danger: #EF4444;
+  --color-success: #34d399;
+  --color-info: #60a5fa;
+  --color-warn: #fbbf24;
+  --color-danger: #ef4444;
 }
 
 /* Helpful utility classes */
-.bg-primary { background-color: var(--color-primary); }
-.text-primary { color: var(--color-primary); }
-.bg-surface { background-color: var(--color-surface); }
-.text-muted { color: var(--color-muted-text); }
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+.text-muted {
+  color: var(--color-muted-text);
+}
 
 /* Example button variant */
 .btn-primary {

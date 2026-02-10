@@ -1,3 +1,5 @@
+import CountdownTimer from "./CountdownTimer";
+
 export default function Aniversary() {
-    return <h1>Aniversary Page</h1>
+  return <CountdownTimer />;
 }

@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Playpen+Sans+Deva:wght@100..800&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  min-height: 80vh;
+  gap: 1rem;
+}
+
+.controls {
+  position: relative;
+  width: 720px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.nav {
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.nav:not(:disabled):hover {
+  transform: translateY(-3px);
+}
+
+.book {
+  width: 720px;
+  height: 480px;
+  perspective: 2000px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #fff 0%, #f7f7f7 100%);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.leftPage,
+.rightPage {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+.leftPage {
+  left: 0;
+  border-right: 1px solid rgba(0, 0, 0, 0.06);
+  transform-origin: right center;
+  backface-visibility: hidden;
+  z-index: 1;
+}
+
+.rightPage {
+  right: 0;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  z-index: 1;
+}
+
+/* page surface: allows curl / shading */
+.pageSurface {
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  position: relative;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+}
+
+.leftPage .pageSurface {
+  transform-origin: right center;
+}
+.rightPage .pageSurface {
+  transform-origin: left center;
+}
+
+/* shading layer on front of page to emphasize curl */
+.pageSurface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.12) 0%,
+    rgba(0, 0, 0, 0) 25%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* curl / fold animation when flipping to next (right page folds left)
+   we add gentle translateZ and rotateY with a bulge scale to simulate curl */
+.rightPage.flipNext .pageSurface {
+  animation: curlNext 0.7s forwards ease-in;
+}
+
+.leftPage.flipPrev .pageSurface {
+  animation: curlPrev 0.7s forwards ease-in;
+}
+
+@keyframes curlNext {
+  0% {
+    transform: rotateY(0deg) translateZ(0px) scaleX(1);
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.04);
+  }
+  30% {
+    transform: rotateY(-30deg) translateZ(30px) scaleX(1.02);
+    box-shadow: inset 40px 0 80px rgba(0, 0, 0, 0.12);
+  }
+  55% {
+    transform: rotateY(-110deg) translateZ(60px) scaleX(0.95);
+    box-shadow: inset 80px 0 120px rgba(0, 0, 0, 0.18);
+  }
+  100% {
+    transform: rotateY(-180deg) translateZ(0px) scaleX(0.9);
+    box-shadow: none;
+  }
+}
+
+@keyframes curlPrev {
+  0% {
+    transform: rotateY(0deg) translateZ(0px) scaleX(1);
+    box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.04);
+  }
+  30% {
+    transform: rotateY(30deg) translateZ(30px) scaleX(1.02);
+    box-shadow: inset -40px 0 80px rgba(0, 0, 0, 0.12);
+  }
+  55% {
+    transform: rotateY(110deg) translateZ(60px) scaleX(0.95);
+    box-shadow: inset -80px 0 120px rgba(0, 0, 0, 0.18);
+  }
+  100% {
+    transform: rotateY(180deg) translateZ(0px) scaleX(0.9);
+    box-shadow: none;
+  }
+}
+
+/* show shading while animating to emphasize fold */
+.rightPage.flipNext .pageSurface::before,
+.leftPage.flipPrev .pageSurface::before {
+  opacity: 1;
+  transition: opacity 0.05s linear;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  font-family: "Playpen Sans Deva", cursive;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+/* flip animations */
+.flipNext {
+  animation: flipNext 0.7s forwards ease-in;
+}
+
+.flipPrev {
+  animation: flipPrev 0.7s forwards ease-in;
+}
+
+@keyframes flipNext {
+  0% {
+    transform: rotateY(0deg);
+    z-index: 2;
+  }
+  40% {
+    transform: rotateY(-90deg);
+    z-index: 3;
+  }
+  50% {
+    transform: rotateY(-90deg);
+    z-index: 1;
+  }
+  100% {
+    transform: rotateY(-180deg);
+    z-index: 1;
+  }
+}
+
+@keyframes flipPrev {
+  0% {
+    transform: rotateY(0deg);
+    z-index: 2;
+  }
+  40% {
+    transform: rotateY(90deg);
+    z-index: 3;
+  }
+  50% {
+    transform: rotateY(90deg);
+    z-index: 1;
+  }
+  100% {
+    transform: rotateY(180deg);
+    z-index: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .book,
+  .controls {
+    width: 92vw;
+  }
+  .book {
+    height: 60vh;
+  }
+}
